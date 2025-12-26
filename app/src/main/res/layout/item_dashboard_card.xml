@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/card_ripple"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Icone et badge -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <!-- Cercle de fond pour l'icône -->
+            <View
+                android:id="@+id/icon_background"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_background"
+                android:backgroundTint="@color/primary_green_dark" />
+
+            <!-- Icône du module -->
+            <TextView
+                android:id="@+id/module_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="🌾"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <!-- Titre du module -->
+        <TextView
+            android:id="@+id/module_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Module"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <!-- Description du module -->
+        <TextView
+            android:id="@+id/module_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Description"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <!-- Indicateur de navigation -->
+        <View
+            android:layout_width="16dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/primary_green_dark" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
