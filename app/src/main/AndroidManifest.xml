@@ -41,7 +41,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activities.AccueilActivity$PlaceholderActivity"
+            android:name=".Activities.PlaceholderActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.IrrigationActivity"
             android:exported="false" />
 
     </application>
