@@ -103,6 +103,14 @@ public class AccueilActivity extends AppCompatActivity {
                 startActivity(new Intent(AccueilActivity.this, IrrigationActivity.class));
             });
         }
+
+        // --- Setup Plant Module ---
+        CardView plantCard = findViewById(R.id.card_plants);
+        if (plantCard != null) {
+            plantCard.setOnClickListener(v -> {
+                startActivity(new Intent(AccueilActivity.this, PlantActivity.class));
+            });
+        }
     }
 
     @Override
