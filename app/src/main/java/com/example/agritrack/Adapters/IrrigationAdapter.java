@@ -27,6 +27,9 @@ public class IrrigationAdapter extends RecyclerView.Adapter<IrrigationAdapter.Ir
     public interface OnItemActionListener {
         void onEdit(Irrigation irrigation);
         void onDelete(Irrigation irrigation);
+        void onToggleMode(Irrigation irrigation);      // item click -> toggle mode
+        void onToggleManual(Irrigation irrigation);    // long press -> toggle manualState
+        void onConfigure(Irrigation irrigation);       // open pin configuration
     }
 
     public IrrigationAdapter(Context context, List<Irrigation> irrigationList, OnItemActionListener listener) {
@@ -52,7 +55,10 @@ public class IrrigationAdapter extends RecyclerView.Adapter<IrrigationAdapter.Ir
 
         String method = irrigation.getMethod() != null ? irrigation.getMethod() : "N/A";
         double qty = irrigation.getWaterQuantity();
-        String details = String.format(Locale.getDefault(), "%s • %.1f L", method, qty);
+        String mode = irrigation.getMode() != null ? irrigation.getMode() : "auto";
+        String sensor = String.format(Locale.getDefault(), "%.1f", irrigation.getSensorValue());
+        // details: method • qty L • mode • sensor
+        String details = String.format(Locale.getDefault(), "%s • %.1f L • %s • S:%s", method, qty, mode.toUpperCase(Locale.ROOT), sensor);
         holder.txtDetails.setText(details);
 
         String status = irrigation.getStatus() != null ? irrigation.getStatus() : "-";
@@ -71,6 +77,22 @@ public class IrrigationAdapter extends RecyclerView.Adapter<IrrigationAdapter.Ir
 
         holder.btnDelete.setOnClickListener(v -> {
             if (listener != null) listener.onDelete(irrigation);
+        });
+
+        // click toggles mode
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onToggleMode(irrigation);
+        });
+
+        // long click toggles manual state (if zone is remote-configured)
+        holder.itemView.setOnLongClickListener(v -> {
+            if (listener != null) listener.onToggleManual(irrigation);
+            return true;
+        });
+
+        // configuration via clicking details text
+        holder.txtDetails.setOnClickListener(v -> {
+            if (listener != null) listener.onConfigure(irrigation);
         });
     }
 

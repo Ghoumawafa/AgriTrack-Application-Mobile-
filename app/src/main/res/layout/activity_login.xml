@@ -55,15 +55,29 @@
             android:inputType="textPassword"
             android:padding="15dp" />
 
-        <Button
-            android:id="@+id/btnLogin"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginBottom="20dp"
-            android:background="#1F5C2E"
-            android:text="Log In"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#1F5C2E"
+                android:text="Log In"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="#FFFFFF"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/linkSignUp"

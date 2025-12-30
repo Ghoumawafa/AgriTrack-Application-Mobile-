@@ -2,13 +2,26 @@ package com.example.agritrack.Models;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 import com.example.agritrack.Database.DateConverter;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(tableName = "irrigations")
+/**
+ * Irrigation entity with indexes for optimized queries
+ * Indexes on: terrainName, remoteKey, irrigationDate, hardwareEnabled
+ */
+@Entity(
+    tableName = "irrigations",
+    indices = {
+        @Index(value = "terrainName"),
+        @Index(value = "remoteKey", unique = true),
+        @Index(value = "irrigationDate"),
+        @Index(value = "hardwareEnabled")
+    }
+)
 @TypeConverters(DateConverter.class)
 public class Irrigation implements Serializable {
 
@@ -21,6 +34,15 @@ public class Irrigation implements Serializable {
     private String status;
     private String notes;
 
+    // NEW fields for IoT integration
+    private String remoteKey;        // firebase node key for this zone
+    private String mode;             // "auto" or "manual"
+    private boolean manualState;     // in manual mode, true=ON
+    private double sensorValue;      // latest sensor value sent from ESP32
+    private int pumpPin;             // configured pump pin
+    private int sensorPin;           // configured sensor pin
+    private boolean hardwareEnabled; // whether hardware is enabled for this zone
+
     // Room uses this constructor
     public Irrigation() {
         // ensure non-null defaults to avoid NPEs in UI
@@ -28,6 +50,14 @@ public class Irrigation implements Serializable {
         this.method = "N/A";
         this.status = "planifié";
         this.notes = "";
+        // defaults for IoT
+        this.remoteKey = null;
+        this.mode = "auto";
+        this.manualState = false;
+        this.sensorValue = 0.0;
+        this.pumpPin = -1;
+        this.sensorPin = -1;
+        this.hardwareEnabled = false;
     }
 
     // We tell Room to ignore this one to avoid the warning
@@ -39,6 +69,13 @@ public class Irrigation implements Serializable {
         this.method = (method == null || method.isEmpty()) ? "N/A" : method;
         this.status = "planifié";
         this.notes = "";
+        this.remoteKey = null;
+        this.mode = "auto";
+        this.manualState = false;
+        this.sensorValue = 0.0;
+        this.pumpPin = -1;
+        this.sensorPin = -1;
+        this.hardwareEnabled = false;
     }
 
     // --- Getters & Setters ---
@@ -56,4 +93,20 @@ public class Irrigation implements Serializable {
     public void setStatus(String status) { this.status = status; }
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
+
+    // IoT getters/setters
+    public String getRemoteKey() { return remoteKey; }
+    public void setRemoteKey(String remoteKey) { this.remoteKey = remoteKey; }
+    public String getMode() { return mode; }
+    public void setMode(String mode) { this.mode = mode; }
+    public boolean isManualState() { return manualState; }
+    public void setManualState(boolean manualState) { this.manualState = manualState; }
+    public double getSensorValue() { return sensorValue; }
+    public void setSensorValue(double sensorValue) { this.sensorValue = sensorValue; }
+    public int getPumpPin() { return pumpPin; }
+    public void setPumpPin(int pumpPin) { this.pumpPin = pumpPin; }
+    public int getSensorPin() { return sensorPin; }
+    public void setSensorPin(int sensorPin) { this.sensorPin = sensorPin; }
+    public boolean isHardwareEnabled() { return hardwareEnabled; }
+    public void setHardwareEnabled(boolean hardwareEnabled) { this.hardwareEnabled = hardwareEnabled; }
 }

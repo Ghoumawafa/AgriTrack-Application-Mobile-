@@ -1,5 +1,6 @@
 package com.example.agritrack.Activities;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,15 @@ public class PlaceholderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_placeholder);
 
+        // Configure back press handling using OnBackPressedDispatcher
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Retourner à l'accueil au lieu de fermer l'app
+                finish();
+            }
+        });
+
         // Configurer le titre
         TextView titleView = findViewById(R.id.placeholder_title);
         if (titleView != null) {
@@ -32,11 +42,5 @@ public class PlaceholderActivity extends AppCompatActivity {
                 finish();
             });
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Retourner à l'accueil au lieu de fermer l'app
-        super.onBackPressed();
     }
 }
