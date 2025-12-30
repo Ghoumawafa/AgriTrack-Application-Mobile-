@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="soil_types">
+        <item>Argileux</item>
+        <item>Limoneux</item>
+        <item>Sableux</item>
+        <item>Humifère</item>
+        <item>Calcaire</item>
+        <item>Tourbeux</item>
+        <item>Salin</item>
+        <item>Rocheux</item>
+    </string-array>
+
+    <string-array name="equipment_types">
+        <item>Tracteur</item>
+        <item>Charrue</item>
+        <item>Semoir</item>
+        <item>Moissonneuse-batteuse</item>
+        <item>Remorque</item>
+        <item>Motopompe</item>
+        <item>Pulvérisateur</item>
+        <item>Débroussailleuse</item>
+        <item>Générateur</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="species_array">
+        <item>Vache</item>
+        <item>Mouton</item>
+        <item>Chèvre</item>
+        <item>Poule</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Mâle</item>
+        <item>Femelle</item>
+    </string-array>
+
+    <string-array name="health_array">
+        <item>Sain</item>
+        <item>Malade</item>
+        <item>En traitement</item>
+    </string-array>
+
+    <string-array name="breeds_array">
+        <!-- Races pour Vache -->
+        <item>Holstein</item>
+        <item>Charolaise</item>
+        <item>Limousine</item>
+        <item>Montbéliarde</item>
+        <!-- Races pour Mouton -->
+        <item>Mérinos</item>
+        <item>Suffolk</item>
+        <item>Texel</item>
+        <!-- Races pour Chèvre -->
+        <item>Alpine</item>
+        <item>Saanen</item>
+        <item>Boer</item>
+        <!-- Races pour Poule -->
+        <item>Leghorn</item>
+        <item>Sussex</item>
+        <item>Rhode Island Red</item>
+    </string-array>
+
+
+</resources>

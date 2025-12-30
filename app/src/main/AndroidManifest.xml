@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agritrack">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,8 +53,49 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activities.AccueilActivity$PlaceholderActivity"
+            android:name=".Activities.TerrainListActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Activities.TerrainEditActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.EquipmentListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.EquipmentScannerActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.EquipmentEditActivity"
+            android:exported="false" />
+
+
+
+        <activity
+            android:name=".Activities.Animaux.AnimalCategoryActivity"
+            android:exported="false"
+            android:label="Catégories d'animaux" />
+
+        <!-- Activités AnimalList -->
+        <activity
+            android:name=".Activities.Animaux.AnimalListActivity"
+            android:exported="false"
+            android:label="Liste des animaux" />
+
+        <!-- Activités AddAnimal -->
+        <activity
+            android:name=".Activities.Animaux.AddAnimalActivity"
+            android:exported="false"
+            android:label="Ajouter un animal" />
+
+        <!-- Activités AnimalEdit -->
+        <activity
+            android:name=".Activities.Animaux.AnimalEditActivity"
+            android:exported="false"
+            android:label="Modifier un animal" />
 
     </application>
 

@@ -48,4 +48,20 @@ dependencies {
 // GSON pour la sérialisation
     implementation("com.google.code.gson:gson:2.10.1")
 
+    // Map (MapLibre) for terrain location selection
+    implementation("org.maplibre.gl:android-sdk:9.6.0")
+
+    // GPS / fused location provider for automatic terrain positioning
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    // CameraX and ML Kit Barcode scanning
+    val camerax_version = "1.2.3"
+    implementation("androidx.camera:camera-core:$camerax_version")
+    implementation("androidx.camera:camera-camera2:$camerax_version")
+    implementation("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation("androidx.camera:camera-view:1.2.3")
+
+    // ML Kit Barcode Scanning (on-device)
+    implementation("com.google.mlkit:barcode-scanning:17.0.2")
+
 }

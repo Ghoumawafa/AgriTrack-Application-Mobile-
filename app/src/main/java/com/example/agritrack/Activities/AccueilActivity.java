@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.agritrack.Activities.Animaux.AnimalCategoryActivity;
 import com.example.agritrack.Activities.LoginActivity;
 import com.example.agritrack.Activities.NotificationsActivity;
 import com.example.agritrack.Activities.ProfileActivity;
+import com.example.agritrack.Activities.TerrainListActivity;
+import com.example.agritrack.Activities.EquipmentListActivity;
 import com.example.agritrack.R;
 import com.example.agritrack.Models.DashboardModule;
 import com.example.agritrack.Utils.ModuleCardHelper;
@@ -48,9 +51,7 @@ public class AccueilActivity extends AppCompatActivity {
         initializeComponents();
     }
 
-    /**
-     * Initialise tous les composants de l'interface
-     */
+
     private void initializeComponents() {
         updateWelcomeText();
         setupBottomNavigation();
@@ -98,31 +99,54 @@ public class AccueilActivity extends AppCompatActivity {
      * Configure toutes les cartes de modules
      */
     private void setupModuleCards() {
-        // Créer les modules avec les activités correspondantes
-        // Note: Remplacez PlaceholderActivity par les vraies activités quand elles seront créées
-        DashboardModule[] modules = {
-                new DashboardModule("🐄", "Animaux", "Gérer le bétail", "#1F5C2E", PlaceholderActivity.class),
-                new DashboardModule("🌾", "Cultures", "Suivre les récoltes", "#F57F17", PlaceholderActivity.class),
-                new DashboardModule("💊", "Médicaments", "Soins & vaccins", "#C62828", PlaceholderActivity.class),
-                new DashboardModule("🚜", "Matériel", "Outils & équipements", "#0277BD", PlaceholderActivity.class),
-                new DashboardModule("💰", "Finances", "Dépenses & revenus", "#6A1B9A", PlaceholderActivity.class),
-                new DashboardModule("📅", "Calendrier", "Planifier les tâches", "#E65100", PlaceholderActivity.class)
-        };
+        // Mapper explicitement les cartes visibles dans activity_accueil.xml
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_land),
+            new DashboardModule("🌾", "Terrain", "Gestion des terrains", "#F57F17", TerrainListActivity.class)
+        );
 
-        // IDs des cartes dans le layout
-        int[] cardIds = {
-                R.id.card_animals,
-                R.id.card_plants,
-                R.id.card_medicines,
-                R.id.card_equipment,
-                R.id.card_finance,
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_animals),
+            new DashboardModule("🐄", "Animaux", "Gestion du bétail", "#1F5C2E", AnimalCategoryActivity.class)
+        );
 
-        };
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_plants),
+            new DashboardModule("🌱", "Cultures", "Suivi des récoltes", "#F57F17", PlaceholderActivity.class)
+        );
 
-        // Configurer chaque carte avec son module
-        for (int i = 0; i < modules.length && i < cardIds.length; i++) {
-            ModuleCardHelper.setupModuleCard(this, findViewById(cardIds[i]), modules[i]);
-        }
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_food),
+            new DashboardModule("🍽️", "Alimentation", "Nourriture animaux", "#F57F17", PlaceholderActivity.class)
+        );
+
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_irrigation),
+            new DashboardModule("💧", "Irrigation", "Gestion de l'irrigation", "#0277BD", PlaceholderActivity.class)
+        );
+
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_medicines),
+            new DashboardModule("💊", "Médicaments", "Soins & vaccins", "#C62828", PlaceholderActivity.class)
+        );
+
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_equipment),
+            new DashboardModule("🚜", "Matériel", "Outils & équipements", "#0277BD", EquipmentListActivity.class)
+        );
+
+        ModuleCardHelper.setupModuleCard(
+            this,
+            findViewById(R.id.card_finance),
+            new DashboardModule("💰", "Finances", "Dépenses & revenus", "#6A1B9A", PlaceholderActivity.class)
+        );
     }
 
 
