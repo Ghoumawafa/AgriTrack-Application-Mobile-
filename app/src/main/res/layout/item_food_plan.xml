@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/tvPlanTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🐄 Vache - Laitière"
+            android:textColor="#1F5C2E"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvPlanSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adulte • 500-700 kg"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Nutrition -->
+        <TextView
+            android:id="@+id/tvNutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📊 Ration quotidienne: 15.0 kg\n\n🌾 Foin: 60%\n🌽 Céréales: 35%\n💊 Compléments: 5%\n💧 Eau: 80.0 L"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Horaires -->
+        <TextView
+            android:id="@+id/tvSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🕐 Horaires: 06:00, 12:00, 18:00 (3 repas/jour)"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Coût -->
+        <TextView
+            android:id="@+id/tvCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💰 Coût estimé: 12.00 DT/jour"
+            android:textColor="#1F5C2E"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Recommandations -->
+        <TextView
+            android:id="@+id/tvRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💡 Augmenter grains pendant lactation"
+            android:textColor="#FF9800"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            android:padding="8dp"
+            android:background="#FFF3E0"
+            android:visibility="visible" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

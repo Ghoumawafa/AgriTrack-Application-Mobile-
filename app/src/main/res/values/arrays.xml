@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Types de sol -->
     <string-array name="soil_types">
         <item>Argileux</item>
         <item>Limoneux</item>
@@ -12,6 +13,7 @@
         <item>Rocheux</item>
     </string-array>
 
+    <!-- Types d'équipement -->
     <string-array name="equipment_types">
         <item>Tracteur</item>
         <item>Charrue</item>
@@ -25,24 +27,31 @@
         <item>Autre</item>
     </string-array>
 
+    <!-- Espèces animales (UNE SEULE DÉCLARATION) -->
     <string-array name="species_array">
         <item>Vache</item>
         <item>Mouton</item>
         <item>Chèvre</item>
         <item>Poule</item>
+        <item>Lapin</item>
     </string-array>
 
+    <!-- Genre -->
     <string-array name="gender_array">
         <item>Mâle</item>
         <item>Femelle</item>
+        <item>Non spécifié</item>
     </string-array>
 
+    <!-- Statut de santé -->
     <string-array name="health_array">
         <item>Sain</item>
         <item>Malade</item>
         <item>En traitement</item>
+        <item>En convalescence</item>
     </string-array>
 
+    <!-- Races pour chaque espèce -->
     <string-array name="breeds_array">
         <!-- Races pour Vache -->
         <item>Holstein</item>
@@ -61,7 +70,53 @@
         <item>Leghorn</item>
         <item>Sussex</item>
         <item>Rhode Island Red</item>
+        <!-- Races pour Lapin -->
+        <item>Néo-Zélandais</item>
+        <item>Californien</item>
+        <item>Fauve de Bourgogne</item>
+        <item>Bélier</item>
     </string-array>
 
+    <!-- Types de nourriture -->
+    <string-array name="food_types_array">
+        <item>Foin</item>
+        <item>Grains</item>
+        <item>Maïs</item>
+        <item>Soja</item>
+        <item>Aliments composés</item>
+        <item>Paille</item>
+        <item>Herbe</item>
+        <item>Suppléments vitaminés</item>
+        <item>Eau</item>
+    </string-array>
+
+    <!-- Types de culture pour les terrains -->
+    <string-array name="crop_types_array">
+        <item>Céréales</item>
+        <item>Légumes</item>
+        <item>Fruits</item>
+        <item>Fourrage</item>
+        <item>Maraîchage</item>
+        <item>Viticulture</item>
+        <item>Arboriculture</item>
+        <item>Autre</item>
+    </string-array>
+
+    <!-- Statut d'équipement -->
+    <string-array name="equipment_status_array">
+        <item>Fonctionnel</item>
+        <item>En panne</item>
+        <item>En réparation</item>
+        <item>Hors service</item>
+    </string-array>
+
+    <!-- Unités de mesure -->
+    <string-array name="measurement_units_array">
+        <item>Hectares</item>
+        <item>Mètres carrés</item>
+        <item>Kilogrammes</item>
+        <item>Litres</item>
+        <item>Unités</item>
+    </string-array>
 
 </resources>

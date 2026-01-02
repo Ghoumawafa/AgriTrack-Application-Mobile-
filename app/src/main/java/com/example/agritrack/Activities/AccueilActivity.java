@@ -5,16 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.agritrack.Activities.Animaux.AnimalCategoryActivity;
-import com.example.agritrack.Activities.LoginActivity;
-import com.example.agritrack.Activities.NotificationsActivity;
-import com.example.agritrack.Activities.ProfileActivity;
-import com.example.agritrack.Activities.TerrainListActivity;
-import com.example.agritrack.Activities.EquipmentListActivity;
+import com.example.agritrack.Activities.Animaux.FeedingDashboardActivity;
 import com.example.agritrack.R;
 import com.example.agritrack.Models.DashboardModule;
 import com.example.agritrack.Utils.ModuleCardHelper;
@@ -121,7 +116,7 @@ public class AccueilActivity extends AppCompatActivity {
         ModuleCardHelper.setupModuleCard(
             this,
             findViewById(R.id.card_food),
-            new DashboardModule("🍽️", "Alimentation", "Nourriture animaux", "#F57F17", PlaceholderActivity.class)
+            new DashboardModule("🍽️", "Alimentation", "Nourriture animaux", "#F57F17", FeedingDashboardActivity.class)
         );
 
         ModuleCardHelper.setupModuleCard(

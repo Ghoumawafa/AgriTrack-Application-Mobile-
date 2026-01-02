@@ -63,5 +63,4 @@ dependencies {
 
     // ML Kit Barcode Scanning (on-device)
     implementation("com.google.mlkit:barcode-scanning:17.0.2")
-
 }

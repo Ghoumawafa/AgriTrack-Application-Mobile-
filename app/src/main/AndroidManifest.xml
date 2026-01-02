@@ -96,6 +96,37 @@
             android:name=".Activities.Animaux.AnimalEditActivity"
             android:exported="false"
             android:label="Modifier un animal" />
+        <!-- ===== ACTIVITÉS ALIMENTATION ===== -->
+        <activity
+            android:name=".Activities.Animaux.FeedingDashboardActivity"
+            android:exported="false"
+            android:label="Tableau de bord alimentation" />
+
+        <activity
+            android:name=".Activities.Animaux.TodayFeedingsActivity"
+            android:exported="false"
+            android:label="Repas du jour" />
+
+        <activity
+            android:name=".Activities.Animaux.GenerateScheduleActivity"
+            android:exported="false"
+            android:label="Générer planning" />
+
+        <activity
+            android:name=".Activities.Animaux.FoodPlansListActivity"
+            android:exported="false"
+            android:label="Plans alimentaires" />
+
+        <activity
+            android:name=".Activities.Animaux.FeedingHistoryActivity"
+            android:exported="false"
+            android:label="Historique des repas" />
+
+        <activity
+            android:name=".Activities.Animaux.FeedingStatisticsActivity"
+            android:exported="false"
+            android:label="Statistiques" />
+        
 
     </application>
 
