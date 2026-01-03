@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- En-tête avec jour et statut -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Aujourd'hui"
+                android:textColor="#1F5C2E"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivStatus"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                tools:src="@drawable/ic_notification_active" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Programmé"
+                android:textColor="#4CAF50"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Nom de l'animal -->
+        <TextView
+            android:id="@+id/tvAnimalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom de l'animal"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Heure du repas -->
+        <TextView
+            android:id="@+id/tvFeedingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏰ 07:00"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Type de nourriture -->
+        <TextView
+            android:id="@+id/tvFoodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍽️ Foin et céréales"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Boutons d'action -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/btnReschedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="🔄 Reprogrammer"
+                android:textColor="#2196F3"
+                android:textSize="12sp"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginStart="16dp"
+                android:text="❌ Annuler"
+                android:textColor="#F44336"
+                android:textSize="12sp"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

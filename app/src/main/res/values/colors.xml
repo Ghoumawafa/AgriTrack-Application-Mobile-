@@ -43,4 +43,12 @@
     <!-- Couleurs d'accent -->
     <color name="accent_red">#F44336</color>
     <color name="accent_green">#4CAF50</color>
+    <!-- Nouvelles couleurs pour les notifications -->
+    <color name="green_active">#4CAF50</color>
+    <color name="orange_pending">#FF9800</color>
+    <color name="blue_reschedule">#2196F3</color>
+    <color name="red_cancel">#F44336</color>
+
+
+
 </resources>

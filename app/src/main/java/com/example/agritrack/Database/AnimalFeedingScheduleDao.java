@@ -18,12 +18,15 @@ public interface AnimalFeedingScheduleDao {
     @Query("SELECT * FROM animal_feeding_schedules WHERE feeding_date = :date AND is_fed = 0 AND is_skipped = 0 ORDER BY scheduled_time")
     List<AnimalFeedingScheduleEntity> getPendingFeedingsForDate(String date);
 
-    // ⚠️ AJOUTER CES DEUX REQUÊTES MANQUANTES :
     @Query("SELECT * FROM animal_feeding_schedules WHERE feeding_date = :date AND is_fed = 1 ORDER BY scheduled_time")
     List<AnimalFeedingScheduleEntity> getCompletedFeedingsForDate(String date);
 
     @Query("SELECT * FROM animal_feeding_schedules WHERE feeding_date = :date AND is_skipped = 1 ORDER BY scheduled_time")
     List<AnimalFeedingScheduleEntity> getSkippedFeedingsForDate(String date);
+
+    // ⭐ NOUVELLE MÉTHODE POUR LES NOTIFICATIONS ⭐
+    @Query("SELECT * FROM animal_feeding_schedules ORDER BY feeding_date, scheduled_time")
+    List<AnimalFeedingScheduleEntity> getAll();
 
     @Insert
     long insert(AnimalFeedingScheduleEntity schedule);
@@ -39,6 +42,4 @@ public interface AnimalFeedingScheduleDao {
 
     @Query("SELECT COUNT(*) FROM animal_feeding_schedules WHERE animal_id IN (SELECT id FROM animals WHERE species = :species) AND feeding_date = :date")
     int getMealCountForSpecies(String species, String date);
-
-
 }

@@ -2,10 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agritrack">
 
+    <!-- ===== PERMISSIONS EXISTANTES ===== -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- ===== NOUVELLES PERMISSIONS POUR NOTIFICATIONS ===== -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -22,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgriTrack">
 
+        <!-- ===== ACTIVITÉS ===== -->
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
@@ -72,30 +81,27 @@
             android:name=".Activities.EquipmentEditActivity"
             android:exported="false" />
 
-
-
+        <!-- ===== ACTIVITÉS ANIMAUX ===== -->
         <activity
             android:name=".Activities.Animaux.AnimalCategoryActivity"
             android:exported="false"
             android:label="Catégories d'animaux" />
 
-        <!-- Activités AnimalList -->
         <activity
             android:name=".Activities.Animaux.AnimalListActivity"
             android:exported="false"
             android:label="Liste des animaux" />
 
-        <!-- Activités AddAnimal -->
         <activity
             android:name=".Activities.Animaux.AddAnimalActivity"
             android:exported="false"
             android:label="Ajouter un animal" />
 
-        <!-- Activités AnimalEdit -->
         <activity
             android:name=".Activities.Animaux.AnimalEditActivity"
             android:exported="false"
             android:label="Modifier un animal" />
+
         <!-- ===== ACTIVITÉS ALIMENTATION ===== -->
         <activity
             android:name=".Activities.Animaux.FeedingDashboardActivity"
@@ -126,7 +132,27 @@
             android:name=".Activities.Animaux.FeedingStatisticsActivity"
             android:exported="false"
             android:label="Statistiques" />
-        
+
+        <!-- ===== SERVICES ET RECEIVERS POUR NOTIFICATIONS ===== -->
+        <receiver
+            android:name=".Receivers.NotificationReceiver"
+            android:exported="false"
+            android:enabled="true" />
+
+
+
+        <!-- ===== MÉTA-DONNÉES POUR NOTIFICATIONS ===== -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="feeding_notifications" />
+
+        <!-- ===== SERVICES (si vous en ajoutez plus tard) ===== -->
+        <!--
+        <service
+            android:name=".Services.FeedingNotificationService"
+            android:exported="false"
+            android:foregroundServiceType="shortService" />
+        -->
 
     </application>
 
