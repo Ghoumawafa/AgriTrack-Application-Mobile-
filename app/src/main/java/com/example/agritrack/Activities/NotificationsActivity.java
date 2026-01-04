@@ -32,6 +32,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -39,6 +44,7 @@ public class NotificationsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NotificationAdapter adapter;
     private TextView tvEmpty;
+    private static final int PERMISSION_REQUEST_CODE = 123;
 
     private AnimalFeedingScheduleDao scheduleDao;
     private AnimalDao animalDao;
@@ -50,6 +56,10 @@ public class NotificationsActivity extends AppCompatActivity {
 
         setupBottomNavigation();
         initializeViews();
+
+        //  Vérifier et demander les permissions
+        checkAndRequestPermissions();
+
         loadNotifications();
     }
 
@@ -93,6 +103,34 @@ public class NotificationsActivity extends AppCompatActivity {
             return "Suppléments";
         } else {
             return "Repas standard";
+        }
+    }
+
+    // Ajoutez cette méthode dans NotificationsActivity
+    private void checkAndRequestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Demander la permission
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        PERMISSION_REQUEST_CODE
+                );
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null && !alarmManager.canScheduleExactAlarms()) {
+                Toast.makeText(this,
+                        "⚠️ Veuillez autoriser les alarmes exactes dans les paramètres",
+                        Toast.LENGTH_LONG).show();
+
+                // Optionnel : Ouvrir les paramètres
+                Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivity(intent);
+            }
         }
     }
     private void loadNotifications() {
@@ -304,6 +342,21 @@ public class NotificationsActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "✅ Notifications autorisées", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        "⚠️ Les notifications sont désactivées. Vous ne recevrez pas de rappels.",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void setupBottomNavigation() {

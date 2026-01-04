@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9F3E7">
@@ -39,7 +40,56 @@
             android:textColor="#FFFFFF"
             android:layout_marginStart="16dp" />
 
+        <TextView
+            android:id="@+id/tvAnimalCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 animaux"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
+
+    <!-- Barre de recherche -->
+    <RelativeLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_toStartOf="@+id/btnClearSearch"
+            android:background="@drawable/edit_text_search"
+            android:gravity="center_vertical"
+            android:hint="🔍 Rechercher un animal..."
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            tools:ignore="LabelFor" />
+
+        <ImageButton
+            android:id="@+id/btnClearSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Effacer la recherche"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="#666666"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +98,8 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/searchContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -62,8 +113,8 @@
         android:textSize="16sp"
         android:textColor="#666666"
         android:gravity="center"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/searchContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

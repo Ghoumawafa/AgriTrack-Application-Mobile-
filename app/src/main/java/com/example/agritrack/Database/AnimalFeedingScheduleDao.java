@@ -24,7 +24,7 @@ public interface AnimalFeedingScheduleDao {
     @Query("SELECT * FROM animal_feeding_schedules WHERE feeding_date = :date AND is_skipped = 1 ORDER BY scheduled_time")
     List<AnimalFeedingScheduleEntity> getSkippedFeedingsForDate(String date);
 
-    // ⭐ NOUVELLE MÉTHODE POUR LES NOTIFICATIONS ⭐
+
     @Query("SELECT * FROM animal_feeding_schedules ORDER BY feeding_date, scheduled_time")
     List<AnimalFeedingScheduleEntity> getAll();
 

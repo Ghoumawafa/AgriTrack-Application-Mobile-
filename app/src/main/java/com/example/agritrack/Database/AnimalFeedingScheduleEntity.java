@@ -156,5 +156,39 @@ public class AnimalFeedingScheduleEntity {
 
     public String getSkipReason() { return skipReason; }
     public void setSkipReason(String skipReason) { this.skipReason = skipReason; }
+// Ajoutez cette méthode dans AnimalFeedingScheduleEntity.java
 
+    /**
+     * Retourne le type de nourriture basé sur les quantités
+     */
+    public String getFoodType() {
+        StringBuilder foodType = new StringBuilder();
+
+        if (hayQuantity > 0) {
+            foodType.append("Foin");
+        }
+
+        if (grainsQuantity > 0) {
+            if (foodType.length() > 0) {
+                foodType.append(" et ");
+            }
+            foodType.append("Céréales");
+        }
+
+        if (supplementsQuantity > 0) {
+            if (foodType.length() > 0) {
+                foodType.append(" et ");
+            }
+            foodType.append("Suppléments");
+        }
+
+        if (waterQuantity > 0) {
+            if (foodType.length() > 0) {
+                foodType.append(" + ");
+            }
+            foodType.append("Eau");
+        }
+
+        return foodType.length() > 0 ? foodType.toString() : "Repas standard";
+    }
 }

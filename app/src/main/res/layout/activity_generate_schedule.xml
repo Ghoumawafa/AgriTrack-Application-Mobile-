@@ -73,7 +73,7 @@
                     android:id="@+id/tvStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@android:drawable/edit_text"
+                    android:background="@drawable/edit_text_background"
                     android:gravity="center_vertical"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -97,7 +97,7 @@
                     android:id="@+id/tvEndDate"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@android:drawable/edit_text"
+                    android:background="@drawable/edit_text_background"
                     android:gravity="center_vertical"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -180,22 +180,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="📊 Résumé:\n\n• 0 animaux\n• 0 jours\n• 0 repas"
+                android:text="📊 Résumé:\n\n• Chargement..."
                 android:textColor="#1B5E20"
                 android:textSize="14sp" />
         </androidx.cardview.widget.CardView>
 
-        <!-- Bouton Générer -->
-        <Button
-            android:id="@+id/btnGenerate"
+        <!-- Boutons d'action -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="⚡ Générer le Planning"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:background="@drawable/button_primary"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnDebug"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="🔍 Debug"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:background="@drawable/button_secondary"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnGenerate"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="2"
+                android:text="⚡ Générer le Planning"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/button_primary"
+                android:gravity="center" />
+        </LinearLayout>
 
         <!-- ProgressBar -->
         <ProgressBar
@@ -203,7 +224,80 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Section Debug/Logs (DÉPLIABLE) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDebug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#FFF3E0"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <!-- En-tête Debug -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:background="#FFCC80">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊 DEBUG  LOGS"
+                        android:textColor="#BF360C"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnToggleDebug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="▼ AFFICHER"
+                        android:textColor="#BF360C"
+                        android:textSize="10sp"
+                        android:padding="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+                </RelativeLayout>
+
+                <!-- Zone de logs (cachée par défaut) -->
+                <TextView
+                    android:id="@+id/tvDebug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="15"
+                    android:visibility="gone"
+                    android:padding="12dp"
+                    android:background="#FFFFFF"
+                    android:text="Appuyez sur 'Debug' pour voir les données..."
+                    android:textSize="10sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="2dp"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Instructions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💡 Instructions:\n1. Sélectionnez les espèces\n2. Choisissez la période\n3. Cliquez sur 'Debug' pour vérifier\n4. Générez le planning"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:padding="12dp"
+            android:background="#F0F0F0"
+            android:lineSpacingExtra="4dp" />
 
     </LinearLayout>
 </ScrollView>

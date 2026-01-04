@@ -9,6 +9,10 @@ import java.util.List;
 @Dao
 public interface AnimalFoodPlanDao {
 
+    // ⚠️ CORRECTION : Ajoutez cette méthode importante
+    @Query("SELECT * FROM animal_food_plans WHERE species = :species LIMIT 1")
+    AnimalFoodPlanEntity getPlanBySpecies(String species);
+
     @Query("SELECT * FROM animal_food_plans WHERE species = :species AND category = :category AND age_category = :ageCategory AND :weight BETWEEN min_weight AND max_weight LIMIT 1")
     AnimalFoodPlanEntity findPlanForAnimal(String species, String category, String ageCategory, double weight);
 

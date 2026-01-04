@@ -110,6 +110,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         });
     }
 
+
     @Override
     public int getItemCount() {
         return animalList != null ? animalList.size() : 0;

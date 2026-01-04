@@ -18,12 +18,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private int[] images;
     private OnCategoryClickListener listener;
 
-    // 🔹 Interface click
     public interface OnCategoryClickListener {
         void onCategoryClick(String category);
     }
 
-    // 🔹 Constructeur
     public CategoryAdapter(String[] categories,
                            String[] descriptions,
                            int[] images,
@@ -44,7 +42,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-
         String category = categories[position];
 
         holder.tvCategoryName.setText(category);
@@ -63,7 +60,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.length;
     }
 
-    // 🔹 ViewHolder aligné avec item_category.xml
+    // ✅ Méthode importante pour mettre à jour les données
+    public void updateData(String[] newCategories, String[] newDescriptions, int[] newImages) {
+        this.categories = newCategories;
+        this.descriptions = newDescriptions;
+        this.images = newImages;
+        notifyDataSetChanged();
+    }
+
     static class CategoryViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivCategoryIcon;

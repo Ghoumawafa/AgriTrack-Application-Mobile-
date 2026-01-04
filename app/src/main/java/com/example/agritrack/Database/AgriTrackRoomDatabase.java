@@ -20,7 +20,7 @@ import android.database.Cursor;
                 AnimalFeedingScheduleEntity.class,
                 AnimalFeedingRecordEntity.class
         },
-        version = 9,
+        version = 10,
         exportSchema = false
 )
 public abstract class AgriTrackRoomDatabase extends RoomDatabase {
@@ -517,6 +517,7 @@ public abstract class AgriTrackRoomDatabase extends RoomDatabase {
             database.execSQL("CREATE INDEX IF NOT EXISTS index_animal_feeding_records_record_date_record_time ON animal_feeding_records(record_date, record_time)");
         }
     };
+
     public static AgriTrackRoomDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (AgriTrackRoomDatabase.class) {
