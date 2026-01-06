@@ -69,6 +69,65 @@
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/terrainPreviewCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aperçu du terrain"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/terrainPreviewMapView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewCoords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Coordonnées: —"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewWeatherStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Touchez un terrain pour afficher la météo."
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewWeatherDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="© OpenStreetMap contributors"
+                android:textAppearance="?attr/textAppearanceCaption" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <ListView
         android:id="@+id/terrainListView"
         android:layout_width="match_parent"
