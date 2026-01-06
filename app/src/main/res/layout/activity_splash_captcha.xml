@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#4CAF50"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔐 VÉRIFICATION SÉCURITÉ"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Match the characters in the picture"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To continue, type the characters you see in the picture."
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:id="@+id/imgCaptcha"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:contentDescription="captcha image" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="↻"
+                android:textSize="20sp"
+                android:layout_margin="6dp" />
+
+            <Button
+                android:id="@+id/btnAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔊"
+                android:textSize="20sp"
+                android:layout_margin="6dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The picture contains 8 characters."
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:inputType="text"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="#4CAF50"
+        android:elevation="4dp"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:hint="Characters" />
+
+    <Button
+        android:id="@+id/btnVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:textSize="18sp"
+        android:backgroundTint="#FF5722"
+        android:textColor="@android:color/white"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="12dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⏱️ 15s"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

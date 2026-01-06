@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- ✅ TES 2 ITEMS EXISTANTS (inchangés) -->
+    <item
+        android:id="@+id/action_toggle_theme"
+        android:icon="@drawable/ic_dark_mode"
+        android:title="Thème"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_graphs"
+        android:icon="@drawable/graph"
+        android:title="Graphiques"
+        app:showAsAction="ifRoom" />
+
+    <!-- ✅ NOUVEAU : GEMINI IA (AJOUTE ÇA UNIQUEMENT) -->
+    <item
+        android:id="@+id/action_gemini"
+        android:icon="@drawable/ia"
+        android:title="🤖 IA"
+        app:showAsAction="always" />
+
+</menu>

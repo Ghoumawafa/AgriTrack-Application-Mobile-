@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.FinanceActivity">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:title="Finance"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- Contenu -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- FORMULAIRE -->
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Description"
+                android:layout_marginBottom="12dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="numberDecimal|numberSigned"
+                android:hint="Montant"
+                android:layout_marginBottom="12dp"
+                android:textSize="16sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Sélectionner date"
+                app:icon="@android:drawable/ic_menu_my_calendar"
+                app:iconGravity="start"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <!-- ✅ CHOIX REVENUS / DÉPENSES (2 BOUTONS) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRevenu"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="💰 REVENUS"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:icon="@android:drawable/ic_menu_add"
+                    app:iconGravity="start"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:backgroundTint="#4CAF50" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDepense"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="❤️ DÉPENSES"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:icon="@android:drawable/ic_menu_delete"
+                    app:iconGravity="start"
+                    android:layout_marginStart="8dp"
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:backgroundTint="#F44336" />
+
+            </LinearLayout>
+
+            <!-- Bouton Save -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="➕ AJOUTER TRANSACTION"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:icon="@android:drawable/ic_menu_add"
+                app:iconGravity="start"
+                android:layout_marginBottom="24dp"
+                style="@style/Widget.MaterialComponents.Button" />
+
+            <!-- RÉSUMÉ -->
+            <TextView
+                android:id="@+id/tvTotalRevenus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💰 Revenus: 0.00 Dinar"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="#4CAF50"
+                android:padding="20dp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/tvTotalDepenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="❤️ Dépenses: 0.00 Dinar"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="#F44336"
+                android:padding="20dp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvEuroRate"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="💱 1€ = Chargement..."-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:padding="12dp"-->
+<!--                android:background="?attr/colorSurface"-->
+<!--                android:elevation="2dp" />-->
+
+
+
+            <!-- EXPORT PDF -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExportPdf"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="📄 EXPORT RAPPORT PDF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconGravity="start"
+                android:layout_marginBottom="24dp"
+                style="@style/Widget.MaterialComponents.Button" />
+
+            <!-- LISTE -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📋 Historique"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/input_style">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💧 Nouvelle Irrigation"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Terrain Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom du terrain"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTerrainName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Water Quantity -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantité d'eau estimée (Litres)"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Hardware Configuration Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⚙️ Configuration Matérielle"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Note: Pins are now static on ESP32 (12-16 for sensors, 17-25 for actuators) -->
+
+    <!-- ADD: Pin selectors -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔌 Pin Capteur (SENSOR)"
+        android:textSize="14sp"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginBottom="6dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerSensorPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:minHeight="48dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💡 Pin Actionneur (ACTUATOR / LED)"
+        android:textSize="14sp"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginBottom="6dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerActuatorPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:minHeight="48dp"/>
+
+    <!-- Control Mode Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎛️ Mode de Contrôle"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:minHeight="48dp"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchManualState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activation Manuelle"
+        android:layout_marginBottom="12dp"
+        android:minHeight="48dp"/>
+
+    <!-- Threshold -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seuil Auto (ex: 1500)"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editThreshold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="1500"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Irrigation Method -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Méthode d'Irrigation"
+        android:textSize="14sp"
+        android:textColor="@color/primary_green_dark"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:minHeight="48dp"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="💾 Enregistrer"
+        android:backgroundTint="@color/primary_green"
+        android:textColor="@color/white"
+        android:minHeight="48dp"/>
+
+</LinearLayout>
+</ScrollView>

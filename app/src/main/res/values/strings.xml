@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AgriTrack</string>
+    <string name="login">Connexion</string>
+    <string name="signup">Inscription</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="full_name">Nom complet</string>
+    <string name="confirm_password">Confirmer le mot de passe</string>
+    <string name="logout">Déconnexion</string>
+
+    <!-- Google Sign-In -->
+    <string name="default_web_client_id">680134411322-PLACEHOLDER.apps.googleusercontent.com</string>
+</resources>

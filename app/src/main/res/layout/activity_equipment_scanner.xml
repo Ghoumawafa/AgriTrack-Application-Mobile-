@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/txtHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="Place QR/barcode inside the view"
+        android:padding="12dp"
+        android:background="#88000000"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/btnCloseScan"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:layout_gravity="top|end"
+        android:backgroundTint="#66000000"
+        android:contentDescription="Close"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+</FrameLayout>
