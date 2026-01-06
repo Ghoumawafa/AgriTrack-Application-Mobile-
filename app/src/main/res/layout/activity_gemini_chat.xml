@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#4CAF50"
+        android:titleTextColor="@android:color/white"
+        android:elevation="4dp" />
+
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🤖 Tape ton message pour commencer !"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:padding="64dp"
+        android:textColor="#666666" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:clipToPadding="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
+
+        <EditText
+            android:id="@+id/etMessage"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:hint="Demande à l'IA AgriTrack..."
+            android:textSize="16sp"
+            android:background="@drawable/bg_edittext_rounded"
+            android:paddingHorizontal="16dp"
+            android:inputType="textMultiLine" />
+
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@android:drawable/ic_menu_send"
+            android:background="@drawable/bg_send_button"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Envoyer" />
+
+    </LinearLayout>
+
+</LinearLayout>

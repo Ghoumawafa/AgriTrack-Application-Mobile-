@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="soil_types">
+        <item>Argileux</item>
+        <item>Limoneux</item>
+        <item>Sableux</item>
+        <item>Humifère</item>
+        <item>Calcaire</item>
+        <item>Tourbeux</item>
+        <item>Salin</item>
+        <item>Rocheux</item>
+    </string-array>
+
+    <string-array name="equipment_types">
+        <item>Tracteur</item>
+        <item>Charrue</item>
+        <item>Semoir</item>
+        <item>Moissonneuse-batteuse</item>
+        <item>Remorque</item>
+        <item>Motopompe</item>
+        <item>Pulvérisateur</item>
+        <item>Débroussailleuse</item>
+        <item>Générateur</item>
+        <item>Autre</item>
+    </string-array>
+
+</resources>

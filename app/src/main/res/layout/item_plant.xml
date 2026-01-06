@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#E8F5E9"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌱"
+            android:textSize="24sp"
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtPlantName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom de la Plante"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#2E7D32"/>
+
+            <TextView
+                android:id="@+id/txtPlantType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type • Stade"
+                android:textSize="14sp"
+                android:textColor="#4CAF50"/>
+
+            <TextView
+                android:id="@+id/txtPlantDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantité: 10 • Zone: A1"
+                android:textSize="12sp"
+                android:textColor="#66BB6A"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/txtGrowthStage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Croissance"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_green"/>
+
+            <TextView
+                android:id="@+id/txtPlantingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29 Dec 2025"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"/>
+
+            <!-- Action buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <ImageButton
+                    android:id="@+id/btnViewTreatments"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:contentDescription="Traitements"
+                    android:tint="@android:color/black"
+                    android:padding="6dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_edit"
+                    android:contentDescription="Edit"
+                    android:tint="@android:color/black"
+                    android:padding="6dp"
+                    android:layout_marginStart="8dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_delete"
+                    android:contentDescription="Delete"
+                    android:tint="@android:color/black"
+                    android:padding="6dp"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
