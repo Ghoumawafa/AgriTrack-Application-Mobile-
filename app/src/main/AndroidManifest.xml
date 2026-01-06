@@ -152,8 +152,11 @@
             android:label="Météo Agricole" />
         <activity
             android:name=".Activities.Sensor.StepCounterActivity"
-            android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name=".Activities.Animaux.AddCategoryActivity"
+            android:label="Nouvelle Catégorie"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- ===== SERVICES ET RECEIVERS POUR NOTIFICATIONS ===== -->
         <receiver

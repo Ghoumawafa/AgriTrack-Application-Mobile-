@@ -5,12 +5,13 @@
     <color name="primary_green_light">#4CAF50</color>
     <color name="primary_green_dark">#1B5E20</color>
 
-    <!-- Alias pour compatibilité (les noms qui manquent) -->
-    <color name="green_primary">#2E7D32</color>  <!-- = primary_green -->
-    <color name="green_dark">#1B5E20</color>     <!-- = primary_green_dark -->
+    <!-- Alias pour compatibilité -->
+    <color name="green_primary">#2E7D32</color>
+    <color name="green_dark">#1B5E20</color>
 
     <!-- Couleurs de base -->
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="gray_light">#F5F5F5</color>
     <color name="gray_medium">#9E9E9E</color>
 
@@ -31,24 +32,30 @@
     <color name="card_yellow">#FFFDE7</color>
     <color name="card_cyan">#E0F7FA</color>
 
-    <!-- Couleurs de texte -->
+    <!-- Couleurs de texte - IMPORTANT POUR VISIBILITÉ -->
     <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#999999</color>
+    <color name="text_disabled">#BDBDBD</color>
     <color name="text_on_dark">#FFFFFF</color>
+    <color name="text_on_light">#333333</color>
 
     <!-- Couleurs de fond -->
     <color name="background_light">#F5F7F2</color>
+    <color name="background_cream">#F9F3E7</color>
     <color name="background_white">#FFFFFF</color>
 
     <!-- Couleurs d'accent -->
     <color name="accent_red">#F44336</color>
     <color name="accent_green">#4CAF50</color>
-    <!-- Nouvelles couleurs pour les notifications -->
+
+    <!-- Couleurs pour les notifications -->
     <color name="green_active">#4CAF50</color>
     <color name="orange_pending">#FF9800</color>
     <color name="blue_reschedule">#2196F3</color>
     <color name="red_cancel">#F44336</color>
 
-
-
+    <!-- Couleurs pour les boutons -->
+    <color name="button_primary">#1F5C2E</color>
+    <color name="button_cancel">#999999</color>
 </resources>

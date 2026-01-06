@@ -42,7 +42,7 @@
             android:paddingEnd="8dp" />
     </LinearLayout>
 
-    <!-- ScrollView -->
+    <!-- ScrollView - CORRIGÉ -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -57,7 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:paddingBottom="100dp">
 
             <!-- Nom -->
             <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +72,8 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords" />
+                    android:inputType="textCapWords"
+                    android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Espèce -->
@@ -80,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="Espèce *"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -97,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="Race *"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -114,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sexe"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -131,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date de naissance *"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -154,7 +156,8 @@
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:clickable="true"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint" />
 
                 <Button
                     android:id="@+id/btnSelectDate"
@@ -163,7 +166,8 @@
                     android:text="📅"
                     android:textSize="24sp"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/edit_text_background" />
+                    android:background="@drawable/edit_text_background"
+                    android:textColor="@color/text_primary" />
             </LinearLayout>
 
             <!-- Poids -->
@@ -179,7 +183,8 @@
                     android:id="@+id/etWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Statut de santé -->
@@ -188,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:text="Statut de santé"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -199,14 +204,15 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp" />
 
+            <!-- Espace supplémentaire en bas pour éviter que le contenu soit caché -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="80dp" />
+                android:layout_height="20dp" />
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Boutons fixes en bas -->
+    <!-- Boutons fixes en bas - SANS BottomNavigationView -->
     <LinearLayout
         android:id="@+id/bottom_buttons"
         android:layout_width="0dp"
@@ -227,6 +233,7 @@
             android:text="Annuler"
             android:backgroundTint="#999999"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             android:layout_marginEnd="8dp" />
 
         <Button
@@ -237,17 +244,8 @@
             android:text="Enregistrer"
             android:backgroundTint="#1F5C2E"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             android:layout_marginStart="8dp" />
     </LinearLayout>
-  !
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
