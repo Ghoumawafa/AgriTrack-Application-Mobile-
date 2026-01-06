@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ajouter un animal"
+            android:text="Modifier un animal"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1F5C2E"
@@ -154,7 +154,7 @@
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:clickable="true"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/btnSelectDate"
@@ -234,12 +234,11 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:text="Enregistrer"
+            android:text="Modifier"
             android:backgroundTint="#1F5C2E"
             android:textColor="#FFFFFF"
             android:layout_marginStart="8dp" />
     </LinearLayout>
-  !
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"

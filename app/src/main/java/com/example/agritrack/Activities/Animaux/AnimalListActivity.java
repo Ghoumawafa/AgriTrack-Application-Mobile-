@@ -83,7 +83,7 @@ public class AnimalListActivity extends AppCompatActivity {
         // Configurer la recherche
         setupSearch();
 
-        // Bouton pour ajouter un animal
+        // CORRECTION : Bouton pour ajouter un animal - utilise AddAnimalActivity
         findViewById(R.id.fabAddAnimal).setOnClickListener(v -> {
             openAddAnimalScreen();
         });
@@ -93,11 +93,7 @@ public class AnimalListActivity extends AppCompatActivity {
     }
 
     private void setupSearch() {
-        // Ajouter la barre de recherche si elle n'existe pas dans le layout
-        if (etSearch == null) {
-            // Créer dynamiquement la barre de recherche
-            createSearchBar();
-        } else {
+        if (etSearch != null) {
             // Listener pour la recherche en temps réel
             etSearch.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -136,12 +132,6 @@ public class AnimalListActivity extends AppCompatActivity {
         }
     }
 
-    private void createSearchBar() {
-        // Si vous n'avez pas de barre de recherche dans votre layout,
-        // vous pouvez l'ajouter programmatiquement
-        // Ou mieux, modifiez votre layout pour l'inclure
-    }
-
     private void loadAnimals() {
         new Thread(() -> {
             if (selectedCategory != null && !selectedCategory.isEmpty()) {
@@ -175,37 +165,30 @@ public class AnimalListActivity extends AppCompatActivity {
         filteredAnimals.clear();
 
         if (query.isEmpty()) {
-            // Si la recherche est vide, montrer tous les animaux
             filteredAnimals.addAll(allAnimals);
         } else {
-            // Filtrer selon le nom, race, ou autres critères
             String searchQuery = query.toLowerCase().trim();
 
             for (AnimalEntity animal : allAnimals) {
                 boolean matches = false;
 
-                // Recherche dans le nom (insensible à la casse)
                 if (animal.getName() != null && animal.getName().toLowerCase().contains(searchQuery)) {
                     matches = true;
                 }
 
-                // Recherche dans la race
                 if (!matches && animal.getBreed() != null && animal.getBreed().toLowerCase().contains(searchQuery)) {
                     matches = true;
                 }
 
-                // Recherche dans le sexe
                 if (!matches && animal.getGender() != null && animal.getGender().toLowerCase().contains(searchQuery)) {
                     matches = true;
                 }
 
-                // Recherche dans le statut de santé
                 if (!matches && animal.getHealthStatus() != null &&
                         animal.getHealthStatus().toLowerCase().contains(searchQuery)) {
                     matches = true;
                 }
 
-                // Recherche dans la date de naissance
                 if (!matches && animal.getBirthDate() != null &&
                         animal.getBirthDate().toLowerCase().contains(searchQuery)) {
                     matches = true;
@@ -260,10 +243,9 @@ public class AnimalListActivity extends AppCompatActivity {
     }
 
     private void openAddAnimalScreen() {
-        // Ouvrir l'activité d'ajout d'animal
-        Intent intent = new Intent(this, AnimalEditActivity.class);
+        // CORRECTION : Ouvrir AddAnimalActivity (pas AnimalEditActivity)
+        Intent intent = new Intent(this, AddAnimalActivity.class);
         intent.putExtra("CATEGORY", selectedCategory);
-        intent.putExtra("MODE", "ADD");
         startActivityForResult(intent, 1);
     }
 
@@ -272,7 +254,6 @@ public class AnimalListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            // Recharger les animaux après ajout/modification
             loadAnimals();
             Toast.makeText(this, "Animal enregistré", Toast.LENGTH_SHORT).show();
         }
@@ -281,7 +262,6 @@ public class AnimalListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Recharger les animaux si on revient d'un ajout/modification
         loadAnimals();
     }
 }

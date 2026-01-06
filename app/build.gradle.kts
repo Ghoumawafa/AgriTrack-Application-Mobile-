@@ -76,6 +76,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
+    implementation("com.google.android.material:material:1.11.0")
     // GSON pour la sérialisation
     implementation("com.google.code.gson:gson:2.10.1")
 

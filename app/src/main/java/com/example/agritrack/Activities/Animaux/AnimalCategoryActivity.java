@@ -57,11 +57,13 @@ public class AnimalCategoryActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Gson gson = new Gson();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.animal_activity_category);
 
+        // CORRECTION : Utiliser ImageButton (même type que dans le layout)
         ImageButton btnBack = findViewById(R.id.btnBack);
         FloatingActionButton fabAdd = findViewById(R.id.fabAdd);
         recyclerView = findViewById(R.id.recyclerCategories);
@@ -75,14 +77,21 @@ public class AnimalCategoryActivity extends AppCompatActivity {
         // Charger les catégories
         loadCategories();
 
-        // Bouton retour
-        btnBack.setOnClickListener(v -> finish());
+        // CORRECTION : Bouton retour avec ImageButton
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // Bouton d'ajout
-        fabAdd.setOnClickListener(v -> showAddCategoryDialog());
-
-        // Debug
-        Toast.makeText(this, "Catégories: " + categories.size(), Toast.LENGTH_SHORT).show();
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddCategoryDialog();
+            }
+        });
     }
 
     private void loadCategories() {
@@ -172,7 +181,7 @@ public class AnimalCategoryActivity extends AppCompatActivity {
                     categoriesArray,
                     descriptionsArray,
                     imagesArray,
-                    category -> {
+                    category -> {  // Version lambda
                         // Navigation vers AnimalListActivity
                         Intent intent = new Intent(
                                 AnimalCategoryActivity.this,
@@ -198,12 +207,15 @@ public class AnimalCategoryActivity extends AppCompatActivity {
 
         builder.setView(dialogView);
 
-        builder.setPositiveButton("Ajouter", (dialog, which) -> {
-            String name = etCategoryName.getText().toString().trim();
-            String description = etCategoryDescription.getText().toString().trim();
+        builder.setPositiveButton("Ajouter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = etCategoryName.getText().toString().trim();
+                String description = etCategoryDescription.getText().toString().trim();
 
-            if (validateInput(name, description)) {
-                addCategory(name, description);
+                if (validateInput(name, description)) {
+                    addCategory(name, description);
+                }
             }
         });
 
