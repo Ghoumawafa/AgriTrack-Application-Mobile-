@@ -1,11 +1,13 @@
 package com.example.agritrack.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,6 +19,8 @@ import com.example.agritrack.Database.AgriTrackRoomDatabase;
 import com.example.agritrack.Database.EquipmentDao;
 import com.example.agritrack.Database.EquipmentEntity;
 import com.example.agritrack.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +43,14 @@ public class EquipmentListActivity extends AppCompatActivity {
     private String fromDateStr = "", toDateStr = "";
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipment_list);
+
+        setupBottomNavigation();
 
         equipmentDao = AgriTrackRoomDatabase.getInstance(this).equipmentDao();
 
@@ -101,6 +109,33 @@ public class EquipmentListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EquipmentEditActivity.class);
             intent.putExtra(EXTRA_EQUIPMENT_ID, equipment.getId());
             startActivity(intent);
+        });
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView == null) return;
+
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    startActivity(new Intent(EquipmentListActivity.this, AccueilActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_notifications) {
+                    startActivity(new Intent(EquipmentListActivity.this, NotificationsActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_profile) {
+                    startActivity(new Intent(EquipmentListActivity.this, ProfileActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
         });
     }
 
