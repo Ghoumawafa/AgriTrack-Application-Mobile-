@@ -12,13 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agritrack.Database.AgriTrackRoomDatabase;
 import com.example.agritrack.Database.EquipmentDao;
 import com.example.agritrack.Database.EquipmentEntity;
 import com.example.agritrack.R;
+import com.example.agritrack.Adapters.EquipmentListAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -36,7 +39,7 @@ public class EquipmentListActivity extends AppCompatActivity {
 
     private EquipmentDao equipmentDao;
     private List<EquipmentEntity> equipments = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
+    private EquipmentListAdapter adapter;
     private EditText inputSearch;
     private Spinner spinnerType;
     private Button btnFromDate, btnToDate, btnFilter, btnReset;
@@ -44,6 +47,8 @@ public class EquipmentListActivity extends AppCompatActivity {
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     private BottomNavigationView bottomNavigationView;
+
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +68,15 @@ public class EquipmentListActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        ListView listView = findViewById(R.id.equipmentListView);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
-        listView.setAdapter(adapter);
+        recyclerView = findViewById(R.id.equipmentRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new EquipmentListAdapter(equipment -> {
+            if (equipment == null) return;
+            Intent intent = new Intent(this, EquipmentEditActivity.class);
+            intent.putExtra(EXTRA_EQUIPMENT_ID, equipment.getId());
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(adapter);
 
         // filter/search UI
         inputSearch = findViewById(R.id.inputSearch);
@@ -101,13 +112,6 @@ public class EquipmentListActivity extends AppCompatActivity {
 
         btnScan.setOnClickListener(v -> {
             Intent intent = new Intent(this, EquipmentScannerActivity.class);
-            startActivity(intent);
-        });
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            EquipmentEntity equipment = equipments.get(position);
-            Intent intent = new Intent(this, EquipmentEditActivity.class);
-            intent.putExtra(EXTRA_EQUIPMENT_ID, equipment.getId());
             startActivity(intent);
         });
     }
@@ -154,7 +158,6 @@ public class EquipmentListActivity extends AppCompatActivity {
         Date to = parseDate(toDateStr);
 
         equipments = new ArrayList<>();
-        List<String> rows = new ArrayList<>();
         for (EquipmentEntity e : all) {
             boolean keep = true;
             String name = e.getName() != null ? e.getName().toLowerCase() : "";
@@ -182,17 +185,12 @@ public class EquipmentListActivity extends AppCompatActivity {
 
             if (keep) {
                 equipments.add(e);
-                String row = String.format(Locale.getDefault(), "%s — %s — %s",
-                        e.getName(),
-                        e.getType(),
-                        e.getStatus());
-                rows.add(row);
             }
         }
 
-        adapter.clear();
-        adapter.addAll(rows);
-        adapter.notifyDataSetChanged();
+        if (adapter != null) {
+            adapter.submitList(equipments);
+        }
     }
 
     private void showDatePicker(boolean isFrom) {
