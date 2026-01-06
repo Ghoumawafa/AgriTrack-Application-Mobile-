@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Accueil -->
     <item
         android:id="@+id/nav_home"
         android:title="Accueil"
         android:icon="@drawable/ic_home" />
 
+    <!-- MÉTÉO (NOUVEAU) -->
+    <item
+        android:id="@+id/nav_weather"
+        android:title="Météo"
+        android:icon="@drawable/ic_weather" />
+
+    <!-- Alertes -->
     <item
         android:id="@+id/nav_notifications"
         android:title="Alertes"
         android:icon="@drawable/ic_notifications" />
 
+    <!-- Profil -->
     <item
         android:id="@+id/nav_profile"
         android:title="Profil"
         android:icon="@drawable/ic_profile" />
+
 </menu>

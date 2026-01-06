@@ -26,9 +26,9 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_baseline_arrow_back_24"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Retour"
-        tools:ignore="ContentDescription" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Retour"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvTitle"

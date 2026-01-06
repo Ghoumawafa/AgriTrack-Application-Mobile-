@@ -94,4 +94,20 @@ dependencies {
 
     // ML Kit Barcode Scanning (on-device)
     implementation("com.google.mlkit:barcode-scanning:17.0.2")
+    // ===== DÉPENDANCES POUR L'API MÉTÉO =====
+
+    // Retrofit pour les appels API
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp pour les logs HTTP
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // Glide pour les images (icônes météo)
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
+    // Pour les Material Design Components (optionnel mais recommandé)
+    implementation("com.google.android.material:material:1.11.0")
 }
