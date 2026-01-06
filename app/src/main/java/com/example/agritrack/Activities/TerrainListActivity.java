@@ -2,6 +2,7 @@ package com.example.agritrack.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,10 @@ import com.example.agritrack.Database.TerrainEntity;
 import com.example.agritrack.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
+import android.view.MenuItem;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -76,6 +81,8 @@ public class TerrainListActivity extends AppCompatActivity {
     private long lastTapAtMs = 0;
     private boolean shownTapHint = false;
 
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Mapbox initialization is required before creating MapView
@@ -93,6 +100,8 @@ public class TerrainListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TerrainEditActivity.class);
             startActivity(intent);
         });
+
+        setupBottomNavigation();
 
         // Preview UI
         txtPreviewTitle = findViewById(R.id.txtPreviewTitle);
@@ -435,6 +444,36 @@ public class TerrainListActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (previewMapView != null) previewMapView.onSaveInstanceState(outState);
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView == null) return;
+
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    Intent intent = new Intent(TerrainListActivity.this, AccueilActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_notifications) {
+                    Intent intent = new Intent(TerrainListActivity.this, NotificationsActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_profile) {
+                    Intent intent = new Intent(TerrainListActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void showTerrainActionsDialog(TerrainEntity terrain) {
