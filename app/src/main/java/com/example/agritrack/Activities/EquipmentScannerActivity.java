@@ -1,8 +1,10 @@
 package com.example.agritrack.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
@@ -83,6 +85,7 @@ public class EquipmentScannerActivity extends AppCompatActivity {
                         .build();
 
                 imageAnalysis.setAnalyzer(cameraExecutor, new ImageAnalysis.Analyzer() {
+                    @OptIn(markerClass = ExperimentalGetImage.class)
                     @Override
                     public void analyze(@NonNull ImageProxy imageProxy) {
                         if (processing) {

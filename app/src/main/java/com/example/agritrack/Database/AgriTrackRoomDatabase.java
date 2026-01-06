@@ -21,6 +21,14 @@ import com.example.agritrack.Database.IrrigationDao;
 import com.example.agritrack.Database.IrrigationEntity;
 import com.example.agritrack.Database.PlantDao;
 import com.example.agritrack.Database.PlantEntity;
+import com.example.agritrack.Database.AnimalDao;
+import com.example.agritrack.Database.AnimalEntity;
+import com.example.agritrack.Database.AnimalFoodPlanDao;
+import com.example.agritrack.Database.AnimalFoodPlanEntity;
+import com.example.agritrack.Database.AnimalFeedingScheduleDao;
+import com.example.agritrack.Database.AnimalFeedingScheduleEntity;
+import com.example.agritrack.Database.AnimalFeedingRecordDao;
+import com.example.agritrack.Database.AnimalFeedingRecordEntity;
 import com.example.agritrack.Models.Transaction;
 
 @Database(
@@ -28,11 +36,15 @@ import com.example.agritrack.Models.Transaction;
                 UserAccountEntity.class,
                 TerrainEntity.class,
                 EquipmentEntity.class,
-        Transaction.class,
-        PlantEntity.class,
-        IrrigationEntity.class
+                Transaction.class,
+                PlantEntity.class,
+                IrrigationEntity.class,
+                AnimalEntity.class,
+                AnimalFoodPlanEntity.class,
+                AnimalFeedingScheduleEntity.class,
+                AnimalFeedingRecordEntity.class
         },
-    version = 6,
+        version = 7,
         exportSchema = false
 )
 @TypeConverters({DateConverter.class})
@@ -44,6 +56,10 @@ public abstract class AgriTrackRoomDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
     public abstract PlantDao plantDao();
     public abstract IrrigationDao irrigationDao();
+    public abstract AnimalDao animalDao();
+    public abstract AnimalFoodPlanDao animalFoodPlanDao();
+    public abstract AnimalFeedingScheduleDao animalFeedingScheduleDao();
+    public abstract AnimalFeedingRecordDao animalFeedingRecordDao();
 
     private static volatile AgriTrackRoomDatabase INSTANCE;
 
@@ -142,6 +158,83 @@ public abstract class AgriTrackRoomDatabase extends RoomDatabase {
         }
     };
 
+    private static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Create animals table
+            database.execSQL("CREATE TABLE IF NOT EXISTS `animals` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`name` TEXT NOT NULL, " +
+                    "`species` TEXT NOT NULL, " +
+                    "`breed` TEXT NOT NULL, " +
+                    "`birth_date` TEXT NOT NULL, " +
+                    "`weight` REAL NOT NULL DEFAULT 0.0, " +
+                    "`gender` TEXT NOT NULL, " +
+                    "`health_status` TEXT NOT NULL)");
+
+            // Create animal_food_plans table
+            database.execSQL("CREATE TABLE IF NOT EXISTS `animal_food_plans` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`species` TEXT NOT NULL, " +
+                    "`category` TEXT NOT NULL, " +
+                    "`age_category` TEXT NOT NULL, " +
+                    "`min_weight` REAL NOT NULL DEFAULT 0.0, " +
+                    "`max_weight` REAL NOT NULL DEFAULT 0.0, " +
+                    "`total_daily_food` REAL NOT NULL DEFAULT 0.0, " +
+                    "`hay_percentage` REAL NOT NULL DEFAULT 0.0, " +
+                    "`grains_percentage` REAL NOT NULL DEFAULT 0.0, " +
+                    "`supplements_percentage` REAL NOT NULL DEFAULT 0.0, " +
+                    "`water_liters` REAL NOT NULL DEFAULT 0.0, " +
+                    "`feeding_times` TEXT NOT NULL, " +
+                    "`meals_per_day` INTEGER NOT NULL DEFAULT 0, " +
+                    "`recommendations` TEXT, " +
+                    "`estimated_cost_per_day` REAL NOT NULL DEFAULT 0.0)");
+
+            // Create animal_feeding_schedules table
+            database.execSQL("CREATE TABLE IF NOT EXISTS `animal_feeding_schedules` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`animal_id` INTEGER NOT NULL, " +
+                    "`plan_id` INTEGER, " +
+                    "`meal_number` INTEGER NOT NULL, " +
+                    "`total_meals` INTEGER NOT NULL, " +
+                    "`feeding_date` TEXT NOT NULL, " +
+                    "`scheduled_time` TEXT NOT NULL, " +
+                    "`hay_quantity` REAL NOT NULL DEFAULT 0.0, " +
+                    "`grains_quantity` REAL NOT NULL DEFAULT 0.0, " +
+                    "`supplements_quantity` REAL NOT NULL DEFAULT 0.0, " +
+                    "`water_quantity` REAL NOT NULL DEFAULT 0.0, " +
+                    "`is_fed` INTEGER NOT NULL DEFAULT 0, " +
+                    "`is_skipped` INTEGER NOT NULL DEFAULT 0, " +
+                    "`fed_time` TEXT, " +
+                    "`fed_by` TEXT, " +
+                    "FOREIGN KEY(`animal_id`) REFERENCES `animals`(`id`) ON DELETE CASCADE, " +
+                    "FOREIGN KEY(`plan_id`) REFERENCES `animal_food_plans`(`id`) ON DELETE SET NULL)");
+
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_schedules_animal_id` ON `animal_feeding_schedules` (`animal_id`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_schedules_plan_id` ON `animal_feeding_schedules` (`plan_id`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_schedules_feeding_date_scheduled_time` ON `animal_feeding_schedules` (`feeding_date`, `scheduled_time`)");
+
+            // Create animal_feeding_records table
+            database.execSQL("CREATE TABLE IF NOT EXISTS `animal_feeding_records` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`animal_id` INTEGER NOT NULL, " +
+                    "`schedule_id` INTEGER, " +
+                    "`record_date` TEXT NOT NULL, " +
+                    "`record_time` TEXT NOT NULL, " +
+                    "`status` TEXT NOT NULL, " +
+                    "`quantity_given` REAL NOT NULL DEFAULT 0.0, " +
+                    "`leftovers` REAL NOT NULL DEFAULT 0.0, " +
+                    "`fed_by` TEXT, " +
+                    "`notes` TEXT, " +
+                    "FOREIGN KEY(`animal_id`) REFERENCES `animals`(`id`) ON DELETE CASCADE, " +
+                    "FOREIGN KEY(`schedule_id`) REFERENCES `animal_feeding_schedules`(`id`) ON DELETE CASCADE)");
+
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_records_animal_id` ON `animal_feeding_records` (`animal_id`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_records_schedule_id` ON `animal_feeding_records` (`schedule_id`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_animal_feeding_records_record_date_record_time` ON `animal_feeding_records` (`record_date`, `record_time`)");
+        }
+    };
+
     public static AgriTrackRoomDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (AgriTrackRoomDatabase.class) {
@@ -152,7 +245,7 @@ public abstract class AgriTrackRoomDatabase extends RoomDatabase {
                                     "agritrack.db"
                             )
                             .allowMainThreadQueries()
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                             .fallbackToDestructiveMigrationOnDowngrade()
                             .build();
                 }

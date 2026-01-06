@@ -17,6 +17,8 @@ import com.example.agritrack.Activities.TerrainListActivity;
 import com.example.agritrack.Activities.EquipmentListActivity;
 import com.example.agritrack.Activities.IrrigationActivity;
 import com.example.agritrack.Activities.PlantActivity;
+import com.example.agritrack.Activities.Animaux.AnimalCategoryActivity;
+import com.example.agritrack.Activities.Animaux.FeedingDashboardActivity;
 import com.example.agritrack.R;
 import com.example.agritrack.Models.DashboardModule;
 import com.example.agritrack.Utils.ModuleCardHelper;
@@ -116,7 +118,7 @@ public class AccueilActivity extends AppCompatActivity {
         ModuleCardHelper.setupModuleCard(
             this,
             findViewById(R.id.card_animals),
-            new DashboardModule("🐄", "Animaux", "Gestion du bétail", "#1F5C2E", PlaceholderActivity.class)
+            new DashboardModule("🐄", "Animaux", "Gestion du bétail", "#1F5C2E", AnimalCategoryActivity.class)
         );
 
         ModuleCardHelper.setupModuleCard(
@@ -128,7 +130,7 @@ public class AccueilActivity extends AppCompatActivity {
         ModuleCardHelper.setupModuleCard(
             this,
             findViewById(R.id.card_food),
-            new DashboardModule("🍽️", "Alimentation", "Nourriture animaux", "#F57F17", PlaceholderActivity.class)
+            new DashboardModule("🍽️", "Alimentation", "Nourriture animaux", "#F57F17", FeedingDashboardActivity.class)
         );
 
         ModuleCardHelper.setupModuleCard(

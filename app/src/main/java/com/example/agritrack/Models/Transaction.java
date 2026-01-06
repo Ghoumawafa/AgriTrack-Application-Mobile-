@@ -3,6 +3,7 @@ package com.example.agritrack.Models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
+import androidx.room.Ignore;
 import java.io.Serializable;
 
 @Entity(tableName = "transactions")
@@ -25,6 +26,7 @@ public class Transaction implements Serializable {
     }
 
     // ✅ NOUVEAU CONSTRUCTEUR avec userEmail
+    @Ignore
     public Transaction(String userEmail, String description, double amount,
                        String date, String category, String type) {
         this.userEmail = userEmail;

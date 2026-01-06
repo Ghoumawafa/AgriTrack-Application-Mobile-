@@ -18,6 +18,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <uses-feature
         android:name="android.hardware.location.gps"
         android:required="false" />
@@ -55,7 +60,6 @@
         <!-- AUTH -->
         <activity android:name=".Activities.LoginActivity" android:exported="false" />
         <activity android:name=".Activities.SignupActivity" android:exported="false" />
-        <activity android:name=".Activities.LoginFormActivity" android:exported="false" />
         <activity android:name=".Activities.EmpreinteActivity" android:exported="false" />
 
         <!-- DASHBOARD -->
@@ -81,6 +85,19 @@
         <activity android:name=".Activities.IrrigationActivity" android:exported="false" />
         <activity android:name=".Activities.PlantTreatmentActivity" android:exported="false" />
 
+        <!-- ANIMALS MODULE -->
+        <activity android:name=".Activities.Animaux.AnimalCategoryActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.AnimalListActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.AddAnimalActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.AnimalEditActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.FeedingDashboardActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.TodayFeedingsActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.GenerateScheduleActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.FeedingHistoryActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.FoodPlansListActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.FeedingStatisticsActivity" android:exported="false" />
+        <activity android:name=".Activities.Animaux.AddCategoryActivity" android:exported="false" />
+
         <!-- FINANCE MODULE -->
         <activity android:name=".Activities.FinanceActivity" android:exported="false" />
         <activity android:name=".Activities.GraphsActivity" android:exported="false" />
@@ -90,6 +107,21 @@
             android:name=".Activities.GeminiChatActivity"
             android:exported="false"
             android:parentActivityName=".Activities.FinanceActivity" />
+
+        <!-- RECEIVERS -->
+        <receiver
+            android:name=".Receivers.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name=".Receivers.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <!-- FILE PROVIDER POUR PDF -->
         <provider

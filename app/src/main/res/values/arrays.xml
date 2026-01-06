@@ -25,4 +25,44 @@
         <item>Autre</item>
     </string-array>
 
+    <!-- Animal-related arrays -->
+    <string-array name="gender_array">
+        <item>Mâle</item>
+        <item>Femelle</item>
+    </string-array>
+
+    <string-array name="health_array">
+        <item>Sain</item>
+        <item>Malade</item>
+        <item>Convalescent</item>
+        <item>En traitement</item>
+    </string-array>
+
+    <string-array name="species_array">
+        <item>Vache</item>
+        <item>Mouton</item>
+        <item>Chèvre</item>
+        <item>Poule</item>
+        <item>Lapin</item>
+        <item>Cheval</item>
+        <item>Âne</item>
+        <item>Cochon</item>
+    </string-array>
+
+    <string-array name="breeds_array">
+        <item>Holstein</item>
+        <item>Montbéliarde</item>
+        <item>Normande</item>
+        <item>Charolaise</item>
+        <item>Limousine</item>
+        <item>Mérinos</item>
+        <item>Suffolk</item>
+        <item>Alpine</item>
+        <item>Saanen</item>
+        <item>Leghorn</item>
+        <item>Rhode Island</item>
+        <item>Sussex</item>
+        <item>Autre</item>
+    </string-array>
+
 </resources>

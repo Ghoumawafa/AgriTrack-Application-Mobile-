@@ -93,7 +93,7 @@
                     android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@android:drawable/ic_menu_camera"
                     android:contentDescription="Traitements"
-                    android:tint="@android:color/black"
+                    app:tint="@android:color/black"
                     android:padding="6dp"/>
 
                 <ImageButton
@@ -103,7 +103,7 @@
                     android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@android:drawable/ic_menu_edit"
                     android:contentDescription="Edit"
-                    android:tint="@android:color/black"
+                    app:tint="@android:color/black"
                     android:padding="6dp"
                     android:layout_marginStart="8dp"/>
 
@@ -114,7 +114,7 @@
                     android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@android:drawable/ic_menu_delete"
                     android:contentDescription="Delete"
-                    android:tint="@android:color/black"
+                    app:tint="@android:color/black"
                     android:padding="6dp"
                     android:layout_marginStart="8dp"/>
             </LinearLayout>

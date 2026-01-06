@@ -68,5 +68,8 @@
     <color name="purple_soft">#CE93D8</color>
     <color name="purple_dark">#8E24AA</color>
 
+    <!-- Notification colors -->
+    <color name="green_active">#4CAF50</color>
+    <color name="orange_pending">#FF9800</color>
 
 </resources>

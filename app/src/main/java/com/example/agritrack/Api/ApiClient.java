@@ -3,18 +3,47 @@ package com.example.agritrack.Api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ApiClient {
-    private static final String BASE_URL = "https://api.exchangerate.host/";
-    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
+    private static volatile Retrofit retrofit = null;
+
+    private ApiClient() {
+        // no instances
+    }
 
     public static Retrofit getClient() {
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+            synchronized (ApiClient.class) {
+                if (retrofit == null) {
+                    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                    logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+                    OkHttpClient client = new OkHttpClient.Builder()
+                            .addInterceptor(logging)
+                            .connectTimeout(30, TimeUnit.SECONDS)
+                            .readTimeout(30, TimeUnit.SECONDS)
+                            .writeTimeout(30, TimeUnit.SECONDS)
+                            .build();
+
+                    retrofit = new Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .client(client)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                }
+            }
         }
         return retrofit;
     }
-}
 
+    public static WeatherApiService getWeatherService() {
+        return getClient().create(WeatherApiService.class);
+    }
+}
