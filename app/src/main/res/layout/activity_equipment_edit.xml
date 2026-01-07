@@ -114,6 +114,14 @@
             android:focusable="false"
             android:clickable="true" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNearbyServices"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Services à proximité" />
+
         <Button
             android:id="@+id/btnSaveEquipment"
             android:layout_width="match_parent"
