@@ -7,10 +7,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -39,6 +41,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -79,11 +84,15 @@ public class TerrainEditActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private boolean triedAutoLocate = false;
 
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Mapbox.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terrain_edit);
+
+        setupBottomNavigation();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -217,6 +226,36 @@ public class TerrainEditActivity extends AppCompatActivity {
                 Toast.makeText(this, "Terrain supprimé", Toast.LENGTH_SHORT).show();
             }
             finish();
+        });
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView == null) return;
+
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    Intent intent = new Intent(TerrainEditActivity.this, AccueilActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_notifications) {
+                    Intent intent = new Intent(TerrainEditActivity.this, NotificationsActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.nav_profile) {
+                    Intent intent = new Intent(TerrainEditActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
         });
     }
 

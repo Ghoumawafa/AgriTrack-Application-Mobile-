@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/content_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
@@ -69,6 +78,65 @@
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/terrainPreviewCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aperçu du terrain"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/terrainPreviewMapView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewCoords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Coordonnées: —"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewWeatherStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Touchez un terrain pour afficher la météo."
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtPreviewWeatherDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="© OpenStreetMap contributors"
+                android:textAppearance="?attr/textAppearanceCaption" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <ListView
         android:id="@+id/terrainListView"
         android:layout_width="match_parent"
@@ -80,4 +148,16 @@
         android:paddingTop="4dp"
         android:paddingBottom="4dp" />
 
-</LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

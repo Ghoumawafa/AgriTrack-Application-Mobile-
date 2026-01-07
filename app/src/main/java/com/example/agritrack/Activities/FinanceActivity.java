@@ -144,10 +144,7 @@ public class FinanceActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.action_toggle_theme) {
-            toggleTheme(item);
-            return true;
-        }
+
 
         if (id == R.id.action_graphs) {
             showGraphs();
@@ -162,20 +159,7 @@ public class FinanceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void toggleTheme(@NonNull MenuItem item) {
-        int current = AppCompatDelegate.getDefaultNightMode();
-        if (current == AppCompatDelegate.MODE_NIGHT_YES) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            item.setTitle("🌙 Mode Sombre");
-            Toast.makeText(this, "☀️ Mode Clair", Toast.LENGTH_SHORT).show();
-            recreate(); // ✅ FORCE LE CHANGEMENT
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            item.setTitle("☀️ Mode Clair");
-            Toast.makeText(this, "🌙 Mode Sombre", Toast.LENGTH_SHORT).show();
-            recreate(); // ✅ FORCE LE CHANGEMENT
-        }
-    }
+
 
     private void showGraphs() {
         executor.execute(() -> {
