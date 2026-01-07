@@ -1,12 +1,8 @@
 package com.example.agritrack.Activities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +12,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.example.agritrack.Database.AgriTrackRoomDatabase;
 import com.example.agritrack.Database.PlantDao;
@@ -47,7 +51,15 @@ public class PlantTreatmentActivity extends AppCompatActivity {
 
     private Bitmap lastBitmap;
 
+    // Camera launcher
     private ActivityResultLauncher<Void> takePicturePreviewLauncher;
+
+    // Permission launcher
+    private ActivityResultLauncher<String> requestCameraPermissionLauncher;
+
+    private static final String CAMERA_PERMISSION = Manifest.permission.CAMERA;
+
+    private DiseaseDetector detector; // keep one instance per Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +82,20 @@ public class PlantTreatmentActivity extends AppCompatActivity {
         txtSeverity = findViewById(R.id.txtSeverity);
         txtRecommendation = findViewById(R.id.txtRecommendation);
 
+        detector = new DiseaseDetector(this);
+
         setupBottomNavigation();
         setupPlantSpinner();
-        setupCamera();
+        setupCameraAndPermissions();
 
         btnAnalyze.setEnabled(false);
         btnAnalyze.setOnClickListener(v -> runAnalysis());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (detector != null) detector.close();
     }
 
     private void setupPlantSpinner() {
@@ -85,7 +105,11 @@ public class PlantTreatmentActivity extends AppCompatActivity {
             names.add(p.getId() + " - " + (p.getName() == null ? "Plante" : p.getName()));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                names
+        );
         spinnerPlant.setAdapter(adapter);
 
         int requestedId = getIntent().getIntExtra("plant_id", -1);
@@ -99,7 +123,19 @@ public class PlantTreatmentActivity extends AppCompatActivity {
         }
     }
 
-    private void setupCamera() {
+    private void setupCameraAndPermissions() {
+        requestCameraPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        takePicturePreviewLauncher.launch(null);
+                    } else {
+                        Toast.makeText(this,
+                                "Permission caméra requise pour prendre une photo",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
         takePicturePreviewLauncher = registerForActivityResult(
                 new ActivityResultContracts.TakePicturePreview(),
                 bitmap -> {
@@ -109,25 +145,48 @@ public class PlantTreatmentActivity extends AppCompatActivity {
                         btnAnalyze.setEnabled(true);
                         cardResults.setVisibility(View.GONE);
                     }
-                }
-        );
+                });
 
-        btnCapture.setOnClickListener(v -> takePicturePreviewLauncher.launch(null));
+        btnCapture.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this, CAMERA_PERMISSION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                takePicturePreviewLauncher.launch(null);
+            } else {
+                requestCameraPermissionLauncher.launch(CAMERA_PERMISSION);
+            }
+        });
     }
 
     private void runAnalysis() {
-        if (lastBitmap == null) return;
+        if (lastBitmap == null) {
+            Toast.makeText(this, "Veuillez capturer une image d'abord", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        DiseaseDetector detector = new DiseaseDetector(this);
-        DiseaseDetector.DetectionResult result = detector.detectDisease(lastBitmap);
-
-        txtDisease.setText("Maladie: " + result.diseaseName);
-        txtConfidence.setText("Confiance: " + Math.round(result.confidence * 100) + "%");
-        txtSeverity.setText("Sévérité: " + result.severity);
-        txtRecommendation.setText("Recommandation: " + result.recommendation);
-
+        // UI state
+        btnAnalyze.setEnabled(false);
+        btnAnalyze.setText("Analyse...");
         cardResults.setVisibility(View.VISIBLE);
-        detector.close();
+
+        txtDisease.setText("Maladie: Analyse en cours...");
+        txtConfidence.setText("Confiance: ...");
+        txtSeverity.setText("Sévérité: ...");
+        txtRecommendation.setText("Recommandation: ...");
+
+        detector.detectDiseaseAsync(lastBitmap, result -> {
+            // Switch back to UI thread
+            runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+
+                txtDisease.setText("Maladie: " + result.diseaseName);
+                txtConfidence.setText("Confiance: " + Math.round(result.confidence * 100) + "%");
+                txtSeverity.setText("Sévérité: " + result.severity);
+                txtRecommendation.setText("Recommandation: " + result.recommendation);
+
+                btnAnalyze.setEnabled(true);
+                btnAnalyze.setText("Analyser");
+            });
+        });
     }
 
     private void setupBottomNavigation() {
@@ -140,22 +199,17 @@ public class PlantTreatmentActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.nav_home) {
-                    Intent intent = new Intent(PlantTreatmentActivity.this, AccueilActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                    return true;
+                    startActivity(new Intent(PlantTreatmentActivity.this, AccueilActivity.class));
                 } else if (itemId == R.id.nav_notifications) {
-                    Intent intent = new Intent(PlantTreatmentActivity.this, NotificationsActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                    return true;
+                    startActivity(new Intent(PlantTreatmentActivity.this, NotificationsActivity.class));
                 } else if (itemId == R.id.nav_profile) {
-                    Intent intent = new Intent(PlantTreatmentActivity.this, ProfileActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                    return true;
+                    startActivity(new Intent(PlantTreatmentActivity.this, ProfileActivity.class));
+                } else {
+                    return false;
                 }
-                return false;
+
+                overridePendingTransition(0, 0);
+                return true;
             }
         });
     }
