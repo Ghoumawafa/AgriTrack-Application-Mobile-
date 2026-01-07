@@ -8,16 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:padding="30dp">
 
+        <!-- Logo Section -->
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/agritrack_logo" />
+            android:src="@drawable/agritrack_logo"
+            android:contentDescription="AgriTrack Logo" />
 
+        <!-- App Title Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +30,7 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <!-- Tagline Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +39,7 @@
             android:textColor="#4EA55D"
             android:textSize="16sp" />
 
+        <!-- Email Input -->
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
@@ -45,6 +50,7 @@
             android:inputType="textEmailAddress"
             android:padding="15dp" />
 
+        <!-- Password Input -->
         <EditText
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
@@ -55,6 +61,7 @@
             android:inputType="textPassword"
             android:padding="15dp" />
 
+        <!-- Login Button -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
@@ -63,8 +70,10 @@
             android:background="#1F5C2E"
             android:text="Log In"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:contentDescription="Login button" />
 
+        <!-- Sign Up Link -->
         <TextView
             android:id="@+id/linkSignUp"
             android:layout_width="wrap_content"
@@ -74,5 +83,4 @@
             android:textSize="15sp" />
 
     </LinearLayout>
-
 </ScrollView>

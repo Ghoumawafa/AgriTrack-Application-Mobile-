@@ -22,7 +22,8 @@ public class SplashActivity extends AppCompatActivity {
             if (storageHelper.isUserLoggedIn()) {
                 startActivity(new Intent(SplashActivity.this, com.example.agritrack.Activities.AccueilActivity.class));
             } else {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                // Show fingerprint/empreinte UI first so testers/collaborators can use Exit or biometric
+                startActivity(new Intent(SplashActivity.this, com.example.agritrack.Activities.EmpreinteActivity.class));
             }
             finish();
         }, SPLASH_DELAY);

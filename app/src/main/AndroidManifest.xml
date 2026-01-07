@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.agritrack">
+
+    <!-- Permissions réseau -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Permissions localisation -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Stockage / PDF -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AgriTrack">
+        android:theme="@style/Theme.AgriTrack"
+        tools:targetApi="31">
 
+        <!-- ✅ reCAPTCHA meta-data -->
+        <meta-data
+            android:name="com.google.android.recaptcha.destination"
+            android:value="https://agritrack.com/verify" />
+
+        <!-- SPLASH / LAUNCHER -->
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
@@ -20,30 +52,55 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Activities.LoginActivity"
-            android:exported="false" />
+        <!-- AUTH -->
+        <activity android:name=".Activities.LoginActivity" android:exported="false" />
+        <activity android:name=".Activities.SignupActivity" android:exported="false" />
+        <activity android:name=".Activities.LoginFormActivity" android:exported="false" />
+        <activity android:name=".Activities.EmpreinteActivity" android:exported="false" />
 
-        <activity
-            android:name=".Activities.SignupActivity"
-            android:exported="false" />
+        <!-- DASHBOARD -->
+        <activity android:name=".Activities.AccueilActivity" android:exported="false" />
 
+        <!-- CAPTCHA SPLASH -->
         <activity
-            android:name=".Activities.AccueilActivity"
-            android:exported="false" />
+            android:name=".Activities.SplashCaptchaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AgriTrack" />
 
-        <activity
-            android:name=".Activities.NotificationsActivity"
-            android:exported="false" />
+        <!-- MODULES -->
+        <activity android:name=".Activities.NotificationsActivity" android:exported="false" />
+        <activity android:name=".Activities.ProfileActivity" android:exported="false" />
+        <activity android:name=".Activities.TerrainListActivity" android:exported="false" />
+        <activity android:name=".Activities.TerrainEditActivity" android:exported="false" />
+        <activity android:name=".Activities.EquipmentListActivity" android:exported="false" />
+        <activity android:name=".Activities.EquipmentScannerActivity" android:exported="false" />
+        <activity android:name=".Activities.EquipmentEditActivity" android:exported="false" />
 
-        <activity
-            android:name=".Activities.ProfileActivity"
-            android:exported="false" />
+        <!-- PLANTS / IRRIGATION -->
+        <activity android:name=".Activities.PlantActivity" android:exported="false" />
+        <activity android:name=".Activities.IrrigationActivity" android:exported="false" />
+        <activity android:name=".Activities.PlantTreatmentActivity" android:exported="false" />
 
+        <!-- FINANCE MODULE -->
+        <activity android:name=".Activities.FinanceActivity" android:exported="false" />
+        <activity android:name=".Activities.GraphsActivity" android:exported="false" />
+
+        <!-- ✅ GEMINI IA CHAT (NOUVEAU - AJOUTÉ ICI) -->
         <activity
-            android:name=".Activities.AccueilActivity$PlaceholderActivity"
-            android:exported="false" />
+            android:name=".Activities.GeminiChatActivity"
+            android:exported="false"
+            android:parentActivityName=".Activities.FinanceActivity" />
+
+        <!-- FILE PROVIDER POUR PDF -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.agritrack.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
-
 </manifest>

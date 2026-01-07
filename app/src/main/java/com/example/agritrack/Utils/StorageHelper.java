@@ -3,34 +3,50 @@ package com.example.agritrack.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.agritrack.Database.AgriTrackRoomDatabase;
+import com.example.agritrack.Database.UserAccountDao;
+import com.example.agritrack.Database.UserAccountEntity;
+
 public class StorageHelper {
     private static final String PREF_NAME = "AgriTrackPrefs";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    private final UserAccountDao userAccountDao;
+
     public StorageHelper(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        userAccountDao = AgriTrackRoomDatabase.getInstance(context).userAccountDao();
     }
 
     public void saveUserAccount(String email, String password, String name) {
-        String userKey = "user_" + email.toLowerCase().hashCode();
-        editor.putString(userKey + "_email", email.toLowerCase());
-        editor.putString(userKey + "_password", password);
-        editor.putString(userKey + "_name", name);
-        editor.apply();
+        if (email == null) {
+            return;
+        }
+        String normalizedEmail = email.toLowerCase();
+        userAccountDao.upsert(new UserAccountEntity(normalizedEmail, password, name));
     }
 
     public boolean validateUserCredentials(String email, String password) {
-        String userKey = "user_" + email.toLowerCase().hashCode();
-        String savedEmail = sharedPreferences.getString(userKey + "_email", "");
-        String savedPassword = sharedPreferences.getString(userKey + "_password", "");
-        return email.equalsIgnoreCase(savedEmail) && password.equals(savedPassword);
+        if (email == null) {
+            return false;
+        }
+        String normalizedEmail = email.toLowerCase();
+        String savedPassword = userAccountDao.getPasswordByEmail(normalizedEmail);
+        if (savedPassword == null) {
+            return false;
+        }
+        return password.equals(savedPassword);
     }
 
     public boolean isEmailRegistered(String email) {
-        String userKey = "user_" + email.toLowerCase().hashCode();
-        return sharedPreferences.contains(userKey + "_email");
+        if (email == null) {
+            return false;
+        }
+        String normalizedEmail = email.toLowerCase();
+        return userAccountDao.countByEmail(normalizedEmail) > 0;
     }
 
     public void setUserLoggedIn(boolean isLoggedIn) {
@@ -58,8 +74,12 @@ public class StorageHelper {
     }
 
     public String getUserNameByEmail(String email) {
-        String userKey = "user_" + email.toLowerCase().hashCode();
-        return sharedPreferences.getString(userKey + "_name", "Agriculteur");
+        if (email == null) {
+            return "Agriculteur";
+        }
+        String normalizedEmail = email.toLowerCase();
+        String name = userAccountDao.getNameByEmail(normalizedEmail);
+        return name != null ? name : "Agriculteur";
     }
 
     public void clearUserData() {
