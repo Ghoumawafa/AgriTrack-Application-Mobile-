@@ -12,9 +12,12 @@ import android.text.TextWatcher;
 import android.widget.AutoCompleteTextView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.agritrack.Adapters.TerrainListAdapter;
 import com.example.agritrack.Database.AgriTrackRoomDatabase;
 import com.example.agritrack.Database.TerrainDao;
 import com.example.agritrack.Database.TerrainEntity;
@@ -56,7 +59,9 @@ public class TerrainListActivity extends AppCompatActivity {
 
     private final List<TerrainEntity> allTerrains = new ArrayList<>();
     private final List<TerrainEntity> visibleTerrains = new ArrayList<>();
-    private ArrayAdapter<TerrainEntity> terrainsAdapter;
+    private TerrainListAdapter terrainsAdapter;
+
+    private RecyclerView terrainRecyclerView;
 
     private ArrayAdapter<String> soilTypeAdapter;
     private TextInputEditText searchInput;
@@ -122,63 +127,41 @@ public class TerrainListActivity extends AppCompatActivity {
             });
         }
 
-        ListView listView = findViewById(R.id.terrainListView);
-        terrainsAdapter = new ArrayAdapter<TerrainEntity>(this, R.layout.item_terrain_row, android.R.id.text1, visibleTerrains) {
+        terrainRecyclerView = findViewById(R.id.terrainRecyclerView);
+        terrainsAdapter = new TerrainListAdapter(new TerrainListAdapter.OnTerrainClickListener() {
             @Override
-            public android.view.View getView(int position, android.view.View convertView, android.view.ViewGroup parent) {
-                android.view.View view = super.getView(position, convertView, parent);
-                android.widget.TextView textView = view.findViewById(android.R.id.text1);
-                TerrainEntity t = getItem(position);
-                if (t != null) {
-                    String row = String.format(Locale.getDefault(), "%s — %.2f ha — %s",
-                            t.getName(),
-                            t.getArea(),
-                            t.getLocation()
-                    );
-                    textView.setText(row);
+            public void onTerrainClick(TerrainEntity terrain) {
+                if (terrain == null) return;
+
+                // Single tap shows preview; double tap opens edit.
+                long now = SystemClock.elapsedRealtime();
+                boolean isDoubleTap = terrain.getId() == lastTappedTerrainId && (now - lastTapAtMs) < 650;
+                lastTappedTerrainId = terrain.getId();
+                lastTapAtMs = now;
+
+                if (isDoubleTap) {
+                    Intent intent = new Intent(TerrainListActivity.this, TerrainEditActivity.class);
+                    intent.putExtra(EXTRA_TERRAIN_ID, terrain.getId());
+                    startActivity(intent);
+                } else {
+                    showTerrainPreview(terrain);
+                    if (!shownTapHint) {
+                        shownTapHint = true;
+                        Toast.makeText(TerrainListActivity.this, "Touchez 2 fois pour modifier", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                return view;
             }
 
             @Override
-            public long getItemId(int position) {
-                TerrainEntity item = getItem(position);
-                return item != null ? item.getId() : -1;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return true;
-            }
-        };
-        listView.setAdapter(terrainsAdapter);
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            TerrainEntity terrain = visibleTerrains.get(position);
-            // Single tap shows preview; double tap opens edit.
-            long now = SystemClock.elapsedRealtime();
-            boolean isDoubleTap = terrain.getId() == lastTappedTerrainId && (now - lastTapAtMs) < 650;
-            lastTappedTerrainId = terrain.getId();
-            lastTapAtMs = now;
-
-            if (isDoubleTap) {
-                Intent intent = new Intent(this, TerrainEditActivity.class);
-                intent.putExtra(EXTRA_TERRAIN_ID, terrain.getId());
-                startActivity(intent);
-            } else {
-                showTerrainPreview(terrain);
-                if (!shownTapHint) {
-                    shownTapHint = true;
-                    Toast.makeText(this, "Touchez 2 fois pour modifier", Toast.LENGTH_SHORT).show();
-                }
+            public void onTerrainLongClick(TerrainEntity terrain) {
+                showTerrainActionsDialog(terrain);
             }
         });
 
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            TerrainEntity terrain = visibleTerrains.get(position);
-            showTerrainActionsDialog(terrain);
-            return true;
-        });
+        if (terrainRecyclerView != null) {
+            terrainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            terrainRecyclerView.setAdapter(terrainsAdapter);
+        }
 
         searchInput = findViewById(R.id.searchTerrainsInput);
         if (searchInput != null) {
@@ -275,7 +258,7 @@ public class TerrainListActivity extends AppCompatActivity {
         }
 
         if (terrainsAdapter != null) {
-            terrainsAdapter.notifyDataSetChanged();
+            terrainsAdapter.submitList(visibleTerrains);
         }
     }
 

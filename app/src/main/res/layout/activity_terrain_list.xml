@@ -137,13 +137,12 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <ListView
-        android:id="@+id/terrainListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/terrainRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:layout_weight="1"
-        android:divider="@null"
         android:clipToPadding="false"
         android:paddingTop="4dp"
         android:paddingBottom="4dp" />
